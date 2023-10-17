@@ -2,6 +2,13 @@ import styles from "./CalculatorTable.module.css";
 
 function CalculatorTable(props) {
   
+  const formatter = new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'EUR',
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2
+  });
+
   const columnTitles = [
     {id:1,value:"Year"},
     {id:2,value:"Total Savings"},
@@ -23,12 +30,17 @@ function CalculatorTable(props) {
             ))}
           </tr>
         </thead>
-        <tbody>
-          <tr>
-          {/* {props.tableData.map((x) => (
-              <td key={x.id}>{x}</td>
-            ))} */}
-          </tr>
+        <tbody>   
+          {props.data.map((x) => (
+            <tr key={x.year}>
+              <td>{x.year}</td>
+              <td>{formatter.format(x.savingsEndOfYear)}</td>
+              <td>{formatter.format(x.yearlyInterest)}</td>
+              <td>{formatter.format(x.savingsEndOfYear - props.initialInvestment - x.yearlyContribution*x.year)}</td>
+              <td>{formatter.format(props.initialInvestment + x.yearlyContribution*x.year)}</td>
+            </tr>
+            ))}
+
         </tbody>
       </table>
     </div>
