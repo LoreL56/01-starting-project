@@ -42,14 +42,13 @@ function App() {
   }
  
   return (
-    <div>
+    <>
       <Header />
-    
       <CalculatorForm onReset={onReset} onCalculate={calculateHandler}/>
 
       {!userInput && <p style={{textAlign: 'center'}}>UserInput vuoto.</p>}
       {userInput && <CalculatorTable data={yearlyData} initialInvestment={userInput['current-savings']}/> }
-    </div>
+    </>
   );
 }
 
